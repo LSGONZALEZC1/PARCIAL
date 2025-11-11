@@ -1,4 +1,4 @@
-/* === RESETEO BÁSICO === */
+/* RESETEO BÁSICO  */
 * {
   margin: 0;
   padding: 0;
@@ -26,7 +26,7 @@ body.loaded {
   height: 100%;
 }
 
-/* === INFO BOX (para los carteles "Info") === */
+/*  INFO BOX (para los carteles "Info")  */
 #infoBox {
   position: fixed;
   top: 50%;
@@ -63,7 +63,7 @@ body.loaded {
   display: none;
 }
 
-/* === BOTÓN VOLVER === */
+/*  BOTÓN VOLVER  */
 .btn-volver {
   position: absolute;
   top: 20px;
@@ -75,7 +75,7 @@ body.loaded {
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
-  z-index: 30; /* 👈 más alto para que esté siempre visible */
+  z-index: 30; 
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
@@ -86,7 +86,7 @@ body.loaded {
   transform: scale(1.05);
 }
 
-/* === ANIMACIONES === */
+/*  ANIMACIONES  */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -97,7 +97,7 @@ body.loaded {
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-/* === OVERLAY DESENFOCADO (solo fondo) === */
+/*  OVERLAY DESENFOCADO (solo fondo)  */
 #blurOverlay {
   position: fixed;
   top: 0;
@@ -110,7 +110,7 @@ body.loaded {
   display: none;
 }
 
-/* === DIALOGO DE BIENVENIDA (se ve NÍTIDO) === */
+/*  DIALOGO DE BIENVENIDA (se ve NÍTIDO)  */
 #dialogOverlay {
   position: fixed;
   top: 0;
@@ -128,12 +128,12 @@ body.loaded {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
-  background: rgba(20, 20, 30, 0.9); /* 👈 más opaco para que contraste */
+  background: rgba(20, 20, 30, 0.9); 
   padding: 25px 40px;
   border-radius: 20px;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
   display: none;
-  z-index: 20; /* 👈 más alto que el blur */
+  z-index: 20; 
   max-width: 400px;
   color: #fff;
   text-align: center;
@@ -153,7 +153,7 @@ body.loaded {
   line-height: 1.4;
 }
 
-/* === BOTÓN COMENZAR RECORRIDO === */
+/*  BOTÓN COMENZAR RECORRIDO  */
 #startBtn {
   margin-top: 20px;
   background: rgba(255, 255, 255, 0.15);
@@ -173,7 +173,7 @@ body.loaded {
   transform: scale(1.05);
 }
 
-/* === BOTÓN DE CIERRE (✖) DE LOS INFO BOX === */
+/*  BOTÓN DE CIERRE (✖) DE LOS INFO BOX  */
 .closeBtn {
   position: absolute;
   top: 10px;
@@ -190,12 +190,12 @@ body.loaded {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  backdrop-filter: blur(4px); /* 💫 efecto vidrio */
+  backdrop-filter: blur(4px); 
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .closeBtn:hover {
-  background: rgba(255, 76, 76, 0.3); /* 🔴 rojo translúcido */
+  background: rgba(255, 76, 76, 0.3); /* rojo translúcido */
   color: #ff4c4c;
   transform: scale(1.15);
   box-shadow: 0 0 15px rgba(255, 76, 76, 0.6);
@@ -267,7 +267,7 @@ body.loaded {
   cursor: pointer;
 }
 
-/* 🎧 Estilos de la playlist */
+/* Estilos de la playlist */
 .music-player {
   position: fixed;
   top: 15px;

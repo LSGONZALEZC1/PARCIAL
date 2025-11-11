@@ -3,17 +3,17 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
 const canvas = document.getElementById('fondo');
 const scene = new THREE.Scene();
 
-// === CÁMARA ===
+// CÁMARA 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.z = 5;
 
-// === RENDERIZADOR ===
+// RENDERIZADOR
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0); // Fondo transparente (para ver la imagen del CSS)
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-// === FONDO DE PARTÍCULAS SUAVES ===
+// FONDO DE PARTÍCULAS SUAVES
 const geometry = new THREE.BufferGeometry();
 const count = 1500;
 const positions = new Float32Array(count * 3);
@@ -30,7 +30,7 @@ const material = new THREE.PointsMaterial({
 const particles = new THREE.Points(geometry, material);
 scene.add(particles);
 
-// === AURORA TRAIL (colita de luz del mouse) ===
+// AURORA TRAIL (colita de luz del mouse)
 const vertexShader = `
   attribute float alpha;
   varying float vAlpha;
@@ -66,11 +66,11 @@ let alphas = [];
 const auroraMesh = new THREE.Points(auroraGeometry, auroraMaterial);
 scene.add(auroraMesh);
 
-// === CONFIGURACIÓN DE VIDA DE LAS PARTÍCULAS ===
+// CONFIGURACIÓN DE LAS PARTÍCULAS 
 const trailLifetime = 500; // milisegundos
 const maxTrail = 150; // cantidad máxima
 
-// === SEGUIMIENTO DEL MOUSE ===
+// SEGUIMIENTO DEL MOUSE 
 window.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth) * 2 - 1;
   const y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -85,7 +85,7 @@ window.addEventListener('mousemove', (e) => {
   if (auroraPoints.length > maxTrail) auroraPoints.shift();
 });
 
-// === ACTUALIZAR ESTELA ===
+// ACTUALIZAR ESTELA 
 function updateAurora() {
   const now = performance.now();
 
@@ -109,7 +109,7 @@ function updateAurora() {
   auroraGeometry.setAttribute('alpha', new THREE.BufferAttribute(alphas, 1));
 }
 
-// === EFECTO DE DESTELLOS AL HACER CLIC ===
+// EFECTO DE DESTELLOS AL HACER CLIC 
 function createSparkBurst(x, y) {
   const geometry = new THREE.BufferGeometry();
   const numParticles = 40;
@@ -143,7 +143,7 @@ function createSparkBurst(x, y) {
   scene.add(spark);
 
   let life = 0;
-  const maxLife = 60; // duración en frames (~1s)
+  const maxLife = 60; // duración en frames 
 
   function updateSpark() {
     life++;
@@ -168,7 +168,7 @@ function createSparkBurst(x, y) {
   updateSpark();
 }
 
-// === EVENTO DE CLIC (para crear los destellos) ===
+// EVENTO DE CLIC (para crear los destellos) 
 window.addEventListener('click', (e) => {
   const x = (e.clientX / window.innerWidth) * 2 - 1;
   const y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -182,7 +182,7 @@ window.addEventListener('click', (e) => {
   createSparkBurst(pos.x, pos.y);
 });
 
-// === ANIMACIÓN PRINCIPAL ===
+// ANIMACIÓN PRINCIPAL 
 function animate() {
   requestAnimationFrame(animate);
   particles.rotation.y += 0.0006;
@@ -193,14 +193,14 @@ function animate() {
 }
 animate();
 
-// === AJUSTE RESPONSIVO ===
+// AJUSTE RESPONSIVO 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// === BOTÓN DE ENTRADA ===
+// BOTÓN DE ENTRADA 
 const entrarBtn = document.getElementById('entrarBtn');
 entrarBtn.addEventListener('click', () => {
   document.body.style.transition = 'opacity 0.8s ease';
@@ -211,13 +211,13 @@ entrarBtn.addEventListener('click', () => {
   }, 800);
 });
 
-// === AVATAR Y CUADRO DE BIENVENIDA ===
+// AVATAR Y CUADRO DE BIENVENIDA 
 const avatarInicio = document.getElementById('avatarInicio');
 const welcomeBox = document.getElementById('welcomeBox');
 const welcomeOverlay = document.getElementById('welcomeOverlay');
 
 avatarInicio.addEventListener('click', (e) => {
-  e.stopPropagation(); // evitar que se cierre inmediatamente
+  e.stopPropagation(); 
   welcomeBox.style.display = 'block';
   welcomeOverlay.style.display = 'block';
 });
@@ -228,7 +228,6 @@ welcomeOverlay.addEventListener('click', () => {
   welcomeOverlay.style.display = 'none';
 });
 
-// Evitar que el clic dentro del cuadro cierre el modal
 welcomeBox.addEventListener('click', (e) => {
   e.stopPropagation();
 });

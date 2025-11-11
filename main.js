@@ -9,45 +9,45 @@ let fireworks = [];
 let autoRotate = true;
 let rotateTimeout;
 
-// === INICIALIZACIÓN ===
+// INICIALIZACIÓN 
 init();
 animate();
 
 function init() {
   const container = document.getElementById('container');
 
-  // === ESCENA ===
+  // ESCENA 
   scene = new THREE.Scene();
 
-  // === FONDO ===
+  // FONDO 
   const textureLoader = new THREE.TextureLoader();
   const backgroundTexture = textureLoader.load('img/fondoEstrellado.jpg');
   scene.background = backgroundTexture;
 
-  // === CÁMARA ===
+  // CÁMARA 
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(16, 12, 20);
   camera.lookAt(0, 1, 0);
 
-  // === LUCES ===
+  // LUCES 
   const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
   scene.add(ambientLight);
   const dirLight = new THREE.DirectionalLight(0xffffff, 1);
   dirLight.position.set(10, 10, 10);
   scene.add(dirLight);
 
-  // === RENDER ===
+  //  RENDER 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
   container.appendChild(renderer.domElement);
 
-  // === CONTROLES ===
+  // CONTROLES 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.target.set(0, 1, 0);
 
-  // 👇 pausa la rotación cuando el usuario mueve la cámara
+  // pausa la rotación cuando el usuario mueve la cámara
   controls.addEventListener('start', () => {
     autoRotate = false;
     clearTimeout(rotateTimeout);
@@ -56,7 +56,7 @@ function init() {
 
   const loader = new GLTFLoader();
 
-  // === PUNTOS GALÁCTICOS ===
+  // PUNTOS GALÁCTICOS 
   const particleCount = 1000;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
@@ -83,7 +83,7 @@ function init() {
   particleSystem = new THREE.Points(geometry, material);
   scene.add(particleSystem);
 
-  // === OBJETOS GLB ===
+  // OBJETOS GLB
   const glbs = [
     { path: 'glb/escenario.glb', pos: [0, 0, 0] },
     { path: 'glb/monitor.glb', pos: [-0.01, 0, -0.1] },
@@ -105,7 +105,7 @@ function init() {
     });
   });
 
-  // === ICONOS INFO ===
+  // ICONOS INFO 
   const infos = [
     { name: "info_monitor", pos: [10.2, -6.1, -16] },
     { name: "info_mataua", pos: [-6, -5.8, -14.5], rotY: Math.PI / 8 },
@@ -130,14 +130,14 @@ function init() {
     });
   });
 
-  // === INTERACCIÓN ===
+  // INTERACCIÓN 
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
   window.addEventListener('click', onClick);
   window.addEventListener('resize', onWindowResize);
 }
 
-// === CLICK SOBRE ICONOS INFO ===
+// CLICK SOBRE ICONOS INFO 
 function onClick(event) {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -158,13 +158,13 @@ function onClick(event) {
         info_libro: "Este libro representa un poco de mi vida. Podrás conocer mis aventuras, aprendizajes y momentos significativos que han moldeado quién soy hoy."
       };
 
-      mostrarInfo(textos[obj.name], obj.name); // 👈 le paso también el nombre
+      mostrarInfo(textos[obj.name], obj.name); 
       crearFuegoArtificial(intersects[0].point);
     }
   }
 }
 
-// === FUEGOS ARTIFICIALES ===
+// FUEGOS ARTIFICIALES 
 function crearFuegoArtificial(pos) {
   const count = 150;
   const geometry = new THREE.BufferGeometry();
@@ -205,7 +205,7 @@ function crearFuegoArtificial(pos) {
   fireworks.push({ mesh: firework, velocities, life: 1.0 });
 }
 
-// === MOSTRAR INFO NORMAL (solo X o con botón extra en CV e IEEE) ===
+// MOSTRAR INFO NORMAL (solo X o con botón extra en CV e IEEE) 
 function mostrarInfo(texto, nombre = "") {
   const infoBox = document.getElementById('infoBox');
   const infoText = document.getElementById('infoText');
@@ -217,11 +217,11 @@ function mostrarInfo(texto, nombre = "") {
   avatar.style.display = 'block';
   blurOverlay.style.display = 'block';
 
-  // 👇 elimina botón anterior (si quedó alguno)
+  // elimina botón anterior (si quedó alguno)
   const oldBtn = infoBox.querySelectorAll('.cvBtn');
   oldBtn.forEach(btn => btn.remove());
 
-  // 👇 Botón para "CV"
+  // Botón para "CV"
   if (nombre === "info_cv") {
     const cvBtn = document.createElement('button');
     cvBtn.textContent = "Ver hoja de vida";
@@ -242,7 +242,7 @@ function mostrarInfo(texto, nombre = "") {
     infoBox.appendChild(cvBtn);
   }
 
-  // 👇 NUEVO: Botones para "IEEE"
+  // NUEVO: Botones para "IEEE"
   if (nombre === "info_ieee") {
     // --- Botón 1: Ver artículo ---
     const paperBtn = document.createElement('button');
@@ -299,90 +299,6 @@ function mostrarInfo(texto, nombre = "") {
     };
 
     infoBox.appendChild(paperBtn);
-    infoBox.appendChild(fotoBtn);
-  }
-
-  // 👇 NUEVO: Botón para "Pastel"
-  if (nombre === "info_pastel") {
-    const fotoBtn = document.createElement('button');
-    fotoBtn.textContent = "Ver foto";
-    fotoBtn.className = "cvBtn";
-    fotoBtn.style.marginTop = "12px";
-    fotoBtn.style.padding = "8px 14px";
-    fotoBtn.style.border = "none";
-    fotoBtn.style.borderRadius = "8px";
-    fotoBtn.style.background = "#2e8b57";
-    fotoBtn.style.color = "white";
-    fotoBtn.style.cursor = "pointer";
-    fotoBtn.style.alignSelf = "center";
-
-    fotoBtn.onclick = () => {
-      const overlay = document.createElement('div');
-      overlay.style.position = "fixed";
-      overlay.style.top = "0";
-      overlay.style.left = "0";
-      overlay.style.width = "100%";
-      overlay.style.height = "100%";
-      overlay.style.background = "rgba(0,0,0,0.8)";
-      overlay.style.display = "flex";
-      overlay.style.alignItems = "center";
-      overlay.style.justifyContent = "center";
-      overlay.style.zIndex = "999";
-
-      const img = document.createElement('img');
-      img.src = "img/fotosCocina.png";
-      img.style.maxWidth = "80%";
-      img.style.maxHeight = "80%";
-      img.style.borderRadius = "12px";
-      img.style.boxShadow = "0 0 25px rgba(255,255,255,0.3)";
-      overlay.appendChild(img);
-
-      overlay.addEventListener("click", () => document.body.removeChild(overlay));
-      document.body.appendChild(overlay);
-    };
-
-    infoBox.appendChild(fotoBtn);
-  }
-
-  // 👇 NUEVO: Botón para "Mataua"
-  if (nombre === "info_mataua") {
-    const fotoBtn = document.createElement('button');
-    fotoBtn.textContent = "Ver foto";
-    fotoBtn.className = "cvBtn";
-    fotoBtn.style.marginTop = "12px";
-    fotoBtn.style.padding = "8px 14px";
-    fotoBtn.style.border = "none";
-    fotoBtn.style.borderRadius = "8px";
-    fotoBtn.style.background = "#2e8b57";
-    fotoBtn.style.color = "white";
-    fotoBtn.style.cursor = "pointer";
-    fotoBtn.style.alignSelf = "center";
-
-    fotoBtn.onclick = () => {
-      const overlay = document.createElement('div');
-      overlay.style.position = "fixed";
-      overlay.style.top = "0";
-      overlay.style.left = "0";
-      overlay.style.width = "100%";
-      overlay.style.height = "100%";
-      overlay.style.background = "rgba(0,0,0,0.8)";
-      overlay.style.display = "flex";
-      overlay.style.alignItems = "center";
-      overlay.style.justifyContent = "center";
-      overlay.style.zIndex = "999";
-
-      const img = document.createElement('img');
-      img.src = "img/fotosMataua.png";
-      img.style.maxWidth = "80%";
-      img.style.maxHeight = "80%";
-      img.style.borderRadius = "12px";
-      img.style.boxShadow = "0 0 25px rgba(255,255,255,0.3)";
-      overlay.appendChild(img);
-
-      overlay.addEventListener("click", () => document.body.removeChild(overlay));
-      document.body.appendChild(overlay);
-    };
-
     infoBox.appendChild(fotoBtn);
   }
 
@@ -484,14 +400,14 @@ function abrirGaleriaLibro() {
   document.body.appendChild(overlay);
 }
 
-// === REDIMENSIÓN ===
+// REDIMENSIÓN
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// === ANIMACIÓN ===
+// ANIMACIÓN 
 function animate() {
   requestAnimationFrame(animate);
 
@@ -526,7 +442,7 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-/* 🌟 === BIENVENIDA SOLO AL INICIO === */
+/* BIENVENIDA SOLO AL INICIO */
 window.addEventListener('load', () => {
   const dialogOverlay = document.getElementById('dialogOverlay');
   const dialogBox = document.getElementById('dialogBox');
@@ -543,36 +459,4 @@ window.addEventListener('load', () => {
     dialogOverlay.style.display = 'none';
     dialogBox.style.display = 'none';
   });
-});
-
-/* 🎵 === MINI PLAYLIST DE MÚSICA === */
-
-// Obtener los elementos existentes del HTML
-const audioPlayer = document.getElementById('audioPlayer');
-const playlistItems = document.querySelectorAll('#playlist li');
-
-// Reproducir canción seleccionada
-playlistItems.forEach(item => {
-  item.addEventListener('click', () => {
-    playlistItems.forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-    audioPlayer.src = item.dataset.src;
-    audioPlayer.play();
-  });
-});
-
-// Autoplay siguiente canción al terminar
-let currentIndex = 0;
-audioPlayer.addEventListener('ended', () => {
-  currentIndex = (currentIndex + 1) % playlistItems.length;
-  const next = playlistItems[currentIndex];
-  next.click();
-});
-
-/* 🎛️ === MOSTRAR / OCULTAR PLAYLIST === */
-const toggleBtn = document.getElementById('togglePlaylist');
-const musicPlayerBox = document.querySelector('.music-player');
-
-toggleBtn.addEventListener('click', () => {
-  musicPlayerBox.classList.toggle('collapsed');
 });

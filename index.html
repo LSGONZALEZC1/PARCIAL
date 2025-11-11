@@ -3,81 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio 3D - Laura González</title>
-  <link rel="stylesheet" href="style.css">
-
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
-      }
-    }
-  </script>
+  <title>Inicio - Portafolio 3D</title>
+  <link rel="stylesheet" href="inicio.css">
 </head>
 <body>
-  <!-- 🔙 BOTÓN DE VOLVER -->
-  <button id="btnVolver" class="btn-volver">← Volver al inicio</button>
+  <div class="intro-container">
+    <div class="overlay"></div>
 
-  <div id="container"></div>
+    <div class="content">
+      <h1 class="titulo">Bienvenid@</h1>
+      <h2 class="subtitulo">Portafolio 3D de <span>Laura González</span></h2>
 
-  <div id="infoBox" style="display:none;">
-    <img id="avatarImg" src="img/avatar.png" alt="avatar" style="display:none; width:60px; height:60px; border-radius:50%; margin-right:10px;">
-    <p id="infoText"></p>
-    <button class="closeBtn">✖</button>
-  </div>
-
-  <!-- Overlay para desenfocar el fondo -->
-  <div id="blurOverlay"></div> 
-
-  <!-- 💬 Cuadro de diálogo de bienvenida -->
-  <div id="dialogOverlay"></div>
-  <div id="dialogBox">
-    <img id="dialogAvatar" src="img/avatar.png" alt="Avatar de Laura">
-    <p id="dialogText">
-      ¡Hola! 👋 Este será un recorrido por algunos monumentos representativos de mi vida.<br>
-      Da clic sobre el cartel de <strong>Info</strong> para conocer un poco más 🌟
-    </p>
-    <button id="startBtn">Comenzar recorrido</button>
-  </div>
-
-  <!-- 🎵 MINI PLAYLIST DE MÚSICA -->
-  <div class="music-player collapsed">
-    <div class="music-header">
-      <h3>🎶 Mi Playlist</h3>
-      <button id="togglePlaylist">⬇️</button>
+      <button class="btn-entrar" id="entrarBtn">
+        <span>Entrar al mundo 3D</span>
+      </button>
     </div>
-    <div class="music-content">
-      <audio id="audioPlayer" controls></audio>
-      <ul id="playlist">
-        <li data-src="music/adele_rolling_in_the_deep.mp3">Canción 1: adele_rolling_in_the_deep</li>
-        <li data-src="music/ed_sheeran_perfect.mp3">Canción 2: ed_sheeran_perfect</li>
-        <li data-src="music/one_direction_story_of_my_life.mp3">Canción 3: one_direction_story_of_my_life</li>
-        <li data-src="music/lp_lost_on_you.mp3">Canción 4: lp_lost_on_you</li>
-        <li data-src="music/clean_bandit_rockabye_ft._sean.mp3">Canción 5: clean_bandit_rockabye_ft._sean</li>
-        <li data-src="music/estos_celos_vicente_fernandez.mp3">Canción 6: estos_celos_vicente_fernandez</li>
-        <li data-src="music/sebastian_yatra_camilo_en_guerra.mp3">Canción 7: sebastian_yatra_camilo_en_guerra</li>
-        <li data-src="music/tan_natural_felipe_pelaez.mp3">Canción 8: tan_natural_felipe_pelaez</li>
-        <li data-src="music/dia_tras_dia.mp3">Canción 9: dia_tras_dia</li>
-        <li data-src="music/Don Omar MIX Diva Virtual Sali el Sol Dile Dj Lucas Herrera.mp3">Canción 10: Don_Omar_MIX_Diva_Virtual_Salio_el_Sol_Dile_Dj_Lucas_Herrera</li>
-      </ul>
+
+    <!-- AVATAR DECORATIVO -->
+    <div id="avatarInicio">
+      <img src="img/avatar.png" alt="Avatar de Laura">
     </div>
+
+    <!-- CUADRO DE BIENVENIDA -->
+    <div id="welcomeOverlay"></div>
+    <div id="welcomeBox">
+      <img id="welcomeAvatar" src="img/avatar.png" alt="avatar">
+      <p id="welcomeText">
+        ¡Hola! 👋 Bienvenid@ a mi portafolio 3D. Aquí podrás explorar mis proyectos y trabajos de manera interactiva y divertida. ¡Disfruta tu recorrido! 🌟
+      </p>
+    </div>
+
+    <canvas id="fondo"></canvas>
   </div>
 
-  <!-- Scripts -->
-  <script type="module" src="main.js"></script>
-  <script src="player.js"></script> <!-- 🎧 nuevo script del reproductor -->
-
-  <script>
-    // 🔹 Redirección al inicio
-    document.getElementById('btnVolver').addEventListener('click', () => {
-      window.location.href = 'inicio.html';
-    });
-
-    // 🔹 Efecto de carga
-    window.addEventListener("load", () => {
-      document.body.classList.add("loaded");
-    });
-  </script>
+  <!-- Tu script del fondo -->
+  <script type="module" src="inicio.js"></script>
 </body>
 </html>
