@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - Portafolio 3D</title>
+  <link rel="stylesheet" href="inicio.css">
+</head>
+<body>
+  <div class="intro-container">
+    <div class="overlay"></div>
+
+    <div class="content">
+      <h1 class="titulo">Bienvenid@</h1>
+      <h2 class="subtitulo">Portafolio 3D de <span>Laura González</span></h2>
+
+      <button class="btn-entrar" id="entrarBtn">
+        <span>Entrar al mundo 3D</span>
+      </button>
+    </div>
+
+    <!-- AVATAR DECORATIVO -->
+    <div id="avatarInicio">
+      <img src="img/avatar.png" alt="Avatar de Laura">
+    </div>
+
+    <!-- CUADRO DE BIENVENIDA -->
+    <div id="welcomeOverlay"></div>
+    <div id="welcomeBox">
+      <img id="welcomeAvatar" src="img/avatar.png" alt="avatar">
+      <p id="welcomeText">
+        ¡Hola! 👋 Bienvenid@ a mi portafolio 3D. Aquí podrás explorar mis proyectos y trabajos de manera interactiva y divertida. ¡Disfruta tu recorrido! 🌟
+      </p>
+    </div>
+
+    <canvas id="fondo"></canvas>
+  </div>
+
+  <!-- Tu script del fondo -->
+  <script type="module" src="inicio.js"></script>
+</body>
+</html>

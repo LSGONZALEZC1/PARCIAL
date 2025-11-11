@@ -1,0 +1,329 @@
+/* === RESETEO BÁSICO === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Amatic SC', cursive;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 1.5s ease, transform 2s ease;
+}
+
+body.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+/* === INFO BOX (para los carteles "Info") === */
+#infoBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(20, 20, 30, 0.85);
+  padding: 30px 45px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  display: none;
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  animation: fadeInScale 0.4s forwards;
+  z-index: 20;
+}
+
+#infoBox img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 2px solid #ac91eb;
+  box-shadow: 0 0 10px rgba(172, 145, 235, 0.6);
+}
+
+#infoBox h2 {
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* === BOTÓN VOLVER === */
+.btn-volver {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 30; /* 👈 más alto para que esté siempre visible */
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.btn-volver:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* === OVERLAY DESENFOCADO (solo fondo) === */
+#blurOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  z-index: 8;
+  display: none;
+}
+
+/* === DIALOGO DE BIENVENIDA (se ve NÍTIDO) === */
+#dialogOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  z-index: 9;
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+#dialogBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(20, 20, 30, 0.9); /* 👈 más opaco para que contraste */
+  padding: 25px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 20; /* 👈 más alto que el blur */
+  max-width: 400px;
+  color: #fff;
+  text-align: center;
+  animation: fadeInScale 0.5s ease forwards;
+}
+
+#dialogBox img#dialogAvatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 2px solid #ac91eb;
+}
+
+#dialogBox p#dialogText {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* === BOTÓN COMENZAR RECORRIDO === */
+#startBtn {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+#startBtn:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* === BOTÓN DE CIERRE (✖) DE LOS INFO BOX === */
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.15); /* fondo translúcido */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 50%; /* forma circular */
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px); /* 💫 efecto vidrio */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.closeBtn:hover {
+  background: rgba(255, 76, 76, 0.3); /* 🔴 rojo translúcido */
+  color: #ff4c4c;
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(255, 76, 76, 0.6);
+}
+
+.galeria-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+.galeria-titulo {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.galeria-img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+
+.galeria-descripcion {
+  color: #ddd;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 80%;
+}
+
+.galeria-controls {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+}
+
+.galeria-btn {
+  padding: 20px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #2e8b57;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.galeria-cerrar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* 🎧 Estilos de la playlist */
+.music-player {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 12px;
+  padding: 10px;
+  width: 240px;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.music-player .music-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.music-player button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.music-player.collapsed .music-content {
+  display: none;
+}
+
+.music-player.collapsed button {
+  transform: rotate(180deg);
+}
+
+.music-content audio {
+  width: 100%;
+  margin-top: 8px;
+}
+
+#playlist {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+#playlist li {
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+#playlist li:hover,
+#playlist li.active {
+  background: rgba(255, 255, 255, 0.2);
+}
