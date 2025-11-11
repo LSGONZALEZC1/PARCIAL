@@ -255,8 +255,8 @@ body.loaded {
 
 .galeria-cerrar {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 60px;
+  right: 450px;
   font-size: 1.5rem;
   background: rgba(255,255,255,0.15);
   color: #fff;

@@ -302,6 +302,90 @@ function mostrarInfo(texto, nombre = "") {
     infoBox.appendChild(fotoBtn);
   }
 
+  // NUEVO: Botón para "Pastel"
+  if (nombre === "info_pastel") {
+    const fotoBtn = document.createElement('button');
+    fotoBtn.textContent = "Ver foto";
+    fotoBtn.className = "cvBtn";
+    fotoBtn.style.marginTop = "12px";
+    fotoBtn.style.padding = "8px 14px";
+    fotoBtn.style.border = "none";
+    fotoBtn.style.borderRadius = "8px";
+    fotoBtn.style.background = "#2e8b57";
+    fotoBtn.style.color = "white";
+    fotoBtn.style.cursor = "pointer";
+    fotoBtn.style.alignSelf = "center";
+
+    fotoBtn.onclick = () => {
+      const overlay = document.createElement('div');
+      overlay.style.position = "fixed";
+      overlay.style.top = "0";
+      overlay.style.left = "0";
+      overlay.style.width = "100%";
+      overlay.style.height = "100%";
+      overlay.style.background = "rgba(0,0,0,0.8)";
+      overlay.style.display = "flex";
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      overlay.style.zIndex = "999";
+
+      const img = document.createElement('img');
+      img.src = "img/fotosCocina.png";
+      img.style.maxWidth = "80%";
+      img.style.maxHeight = "80%";
+      img.style.borderRadius = "12px";
+      img.style.boxShadow = "0 0 25px rgba(255,255,255,0.3)";
+      overlay.appendChild(img);
+
+      overlay.addEventListener("click", () => document.body.removeChild(overlay));
+      document.body.appendChild(overlay);
+    };
+
+    infoBox.appendChild(fotoBtn);
+  }
+
+  // NUEVO: Botón para "Mataua"
+  if (nombre === "info_mataua") {
+    const fotoBtn = document.createElement('button');
+    fotoBtn.textContent = "Ver foto";
+    fotoBtn.className = "cvBtn";
+    fotoBtn.style.marginTop = "12px";
+    fotoBtn.style.padding = "8px 14px";
+    fotoBtn.style.border = "none";
+    fotoBtn.style.borderRadius = "8px";
+    fotoBtn.style.background = "#2e8b57";
+    fotoBtn.style.color = "white";
+    fotoBtn.style.cursor = "pointer";
+    fotoBtn.style.alignSelf = "center";
+
+    fotoBtn.onclick = () => {
+      const overlay = document.createElement('div');
+      overlay.style.position = "fixed";
+      overlay.style.top = "0";
+      overlay.style.left = "0";
+      overlay.style.width = "100%";
+      overlay.style.height = "100%";
+      overlay.style.background = "rgba(0,0,0,0.8)";
+      overlay.style.display = "flex";
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      overlay.style.zIndex = "999";
+
+      const img = document.createElement('img');
+      img.src = "img/fotosMataua.png";
+      img.style.maxWidth = "80%";
+      img.style.maxHeight = "80%";
+      img.style.borderRadius = "12px";
+      img.style.boxShadow = "0 0 25px rgba(255,255,255,0.3)";
+      overlay.appendChild(img);
+
+      overlay.addEventListener("click", () => document.body.removeChild(overlay));
+      document.body.appendChild(overlay);
+    };
+
+    infoBox.appendChild(fotoBtn);
+  }
+
   // Botón para "Libro" - Galería
   if (nombre === "info_libro") {
     const galeriaBtn = document.createElement('button');
@@ -459,4 +543,36 @@ window.addEventListener('load', () => {
     dialogOverlay.style.display = 'none';
     dialogBox.style.display = 'none';
   });
+});
+
+/* 🎵 === MINI PLAYLIST DE MÚSICA === */
+
+// Obtener los elementos existentes del HTML
+const audioPlayer = document.getElementById('audioPlayer');
+const playlistItems = document.querySelectorAll('#playlist li');
+
+// Reproducir canción seleccionada
+playlistItems.forEach(item => {
+  item.addEventListener('click', () => {
+    playlistItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    audioPlayer.src = item.dataset.src;
+    audioPlayer.play();
+  });
+});
+
+// Autoplay siguiente canción al terminar
+let currentIndex = 0;
+audioPlayer.addEventListener('ended', () => {
+  currentIndex = (currentIndex + 1) % playlistItems.length;
+  const next = playlistItems[currentIndex];
+  next.click();
+});
+
+/* 🎛️ === MOSTRAR / OCULTAR PLAYLIST === */
+const toggleBtn = document.getElementById('togglePlaylist');
+const musicPlayerBox = document.querySelector('.music-player');
+
+toggleBtn.addEventListener('click', () => {
+  musicPlayerBox.classList.toggle('collapsed');
 });
